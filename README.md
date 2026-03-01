@@ -106,11 +106,7 @@ Auto Scaling Controller
     <li>동아리 시연용 프로젝트</li>
 </ul>
 <h2>시연 영상</h2>
-
-<video width="100%" controls>
-    <source src="video/2026 TeamLog 시연회.mov" type="video/mov">
-    브라우저가 video 태그를 지원하지 않습니다.
-</video>
+<a href="https://drive.google.com/file/d/1hitCu3RdgiLiwuF5Y1InaVcdEnwCNJGw/view?usp=drive_link"></a>
 
 </body>
 </html>
