@@ -106,7 +106,7 @@ Auto Scaling Controller
     <li>동아리 시연용 프로젝트</li>
 </ul>
 <h2>시연 영상</h2>
-<a href="https://drive.google.com/file/d/1hitCu3RdgiLiwuF5Y1InaVcdEnwCNJGw/view?usp=drive_link"></a>
+https://drive.google.com/file/d/1hitCu3RdgiLiwuF5Y1InaVcdEnwCNJGw/view?usp=drive_link
 
 </body>
 </html>
