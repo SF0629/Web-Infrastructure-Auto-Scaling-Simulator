@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Infrastructure Auto-Scaling Simulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>WEB INFRASTRUCTURE SIMULATOR</h1>
+            <p class="subtitle">Auto-Scaling Demo Platform</p>
+        </header>
+
+        <div class="main-content">
+            <div class="topology-section">
+                <div class="section-title">NETWORK TOPOLOGY</div>
+                
+                <div class="topology">
+                    <div class="topology-row">
+                        <div class="topology-element client">
+                            <svg class="element-icon" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                            </svg>
+                            <span>Client Requests</span>
+                        </div>
+                    </div>
+
+                    <div class="topology-row" style="padding: 5px 0;">
+                        <svg width="40" height="20" style="opacity: 0.5;">
+                            <path d="M0 10 L30 10 M25 5 L30 10 L25 15" stroke="var(--cyan)" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+
+                    <div class="topology-row">
+                        <div class="topology-element firewall">
+                            <svg class="element-icon" viewBox="0 0 24 24">
+                                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                            </svg>
+                            <span>Firewall</span>
+                        </div>
+                        <div class="topology-element loadbalancer">
+                            <svg class="element-icon" viewBox="0 0 24 24">
+                                <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                            </svg>
+                            <span>Load Balancer</span>
+                        </div>
+                    </div>
+
+                    <div class="topology-row" style="padding: 5px 0;">
+                        <svg width="40" height="20" style="opacity: 0.5;">
+                            <path d="M0 10 L30 10 M25 5 L30 10 L25 15" stroke="var(--cyan)" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+
+                    <div class="servers-container" id="serversContainer">
+                    </div>
+
+                    <div class="topology-row">
+                        <div class="topology-element database">
+                            <svg class="element-icon" viewBox="0 0 24 24">
+                                <path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4zm0 2c3.87 0 6 1.5 6 2s-2.13 2-6 2-6-1.5-6-2 2.13-2 6-2zm6 12c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V17zm0-5c0 .5-2.13 2-6 2s-6-1.5-6-2V9.77c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V12z"/>
+                            </svg>
+                            <span>Database Server</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <div class="section-title">REAL-TIME DASHBOARD</div>
+
+                <div class="stat-card">
+                    <div class="stat-label">Requests / Second</div>
+                    <div class="stat-value" id="rpsValue">0<span class="stat-unit">RPS</span></div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">Total Servers</div>
+                    <div class="stat-value" id="serverCount">2<span class="stat-unit">units</span></div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">Average CPU</div>
+                    <div class="stat-value" id="avgCpu">0<span class="stat-unit">%</span></div>
+                </div>
+
+                <div class="status-indicator">
+                    <div class="status-dot" id="statusDot"></div>
+                    <span class="status-text" id="statusText">STABLE</span>
+                </div>
+
+                <div class="buttons-container">
+                    <button class="btn primary" id="startBtn">Start Simulation</button>
+                    <button class="btn" id="surgeBtn">Traffic Surge</button>
+                    <button class="btn" id="resetBtn">Reset</button>
+                    <button class="btn active" id="autoScaleBtn">Auto Scaling: ON</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="log-section">
+            <div class="section-title">SYSTEM LOGS</div>
+            <div class="log-console" id="logConsole">
+                <div class="log-entry">
+                    <span class="log-time">[00:00:00]</span>
+                    <span class="log-purple">[SYSTEM]</span>
+                    <span>Web Infrastructure Simulator initialized. Ready to start.</span>
+                </div>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 15px; color: var(--text-secondary); font-size: 0.75rem; border-top: 1px solid var(--border-color); margin-top: 10px;">
+            Made by <span style="color: var(--cyan);">0xSF</span>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
