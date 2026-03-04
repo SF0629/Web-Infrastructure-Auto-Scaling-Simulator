@@ -108,5 +108,8 @@ Auto Scaling Controller
 <h2>시연 영상</h2>
 https://drive.google.com/file/d/1hitCu3RdgiLiwuF5Y1InaVcdEnwCNJGw/view?usp=drive_link
 
+<h2>사이트</h2>
+https://sf0629.github.io/Real-Time-Load-Balancer-Auto-Scaling-Simulator
+
 </body>
 </html>
