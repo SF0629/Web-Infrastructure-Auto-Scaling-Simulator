@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<h1>Real-Time Load Balancer & Auto Scaling Simulator</h1>
+<h1>Auto Scaling Simulator</h1>
 
 <p>
 웹 환경에서 트래픽 증가에 따른 서버 부하와 오토 스케일링 과정을 시각적으로 보여주는 시뮬레이터입니다.
